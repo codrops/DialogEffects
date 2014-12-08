@@ -1,0 +1,60 @@
+body {
+	background: #555;
+}
+
+.container {
+	position: relative;
+	background: #cae4b6;
+	-webkit-transition: -webkit-transform 0.3s 0.1s;
+	transition: transform 0.3s 0.1s;
+}
+
+.container--move {
+	-webkit-transition: -webkit-transform 0.3s;
+	transition: transform 0.3s;
+	-webkit-transform: scale3d(0.95, 0.95, 1);
+	transform: scale3d(0.95, 0.95, 1);
+}
+
+.dialog.dialog--open .dialog__content,
+.dialog.dialog--close .dialog__content {
+	opacity: 1;
+	-webkit-animation-fill-mode: both;
+	animation-fill-mode: both;
+	-webkit-animation-timing-function: cubic-bezier(0.7,0,0.3,1);
+	animation-timing-function: cubic-bezier(0.7,0,0.3,1);
+}
+
+.dialog.dialog--open .dialog__content {
+	-webkit-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	-webkit-animation-name: anim-open;
+	animation-name: anim-open;
+}
+
+.dialog.dialog--close .dialog__content {
+	-webkit-animation-duration: 0.3s;
+	animation-duration: 0.3s;
+	-webkit-animation-name: anim-close;
+	animation-name: anim-close;
+}
+
+@-webkit-keyframes anim-open {
+	0% { -webkit-transform: translate3d(0, calc(50vh + 50%), 0); }
+	100% { -webkit-transform: translate3d(0, 0, 0); }
+}
+
+@keyframes anim-open {
+	0% {  -webkit-transform: translate3d(0, calc(50vh + 50%), 0); transform: translate3d(0, calc(50vh + 50%), 0); }
+	100% { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+}
+
+@-webkit-keyframes anim-close {
+	0% { -webkit-transform: translate3d(0, 0, 0); }
+	100% { -webkit-transform: translate3d(0, calc(50vh + 50%), 0); }
+}
+
+@keyframes anim-close {
+	0% { -webkit-transform: translate3d(0, 0, 0); transform: translate3d(0, 0, 0); }
+	100% { -webkit-transform: translate3d(0, calc(50vh + 50%), 0); transform: translate3d(0, calc(50vh + 50%), 0); }
+}

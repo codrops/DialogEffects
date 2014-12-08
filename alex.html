@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Dialog Effects | Alex</title>
+		<meta name="description" content="A Collection of Dialog Effects" />
+		<meta name="keywords" content="dialog, effect, modal, overlay, animation, web design" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<!-- common styles -->
+		<link rel="stylesheet" type="text/css" href="css/dialog.css" />
+		<!-- individual effect -->
+		<link rel="stylesheet" type="text/css" href="css/dialog-alex.css" />
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<header class="codrops-header">
+					<h1><span>A collection of</span> Dialog Effects</h1>
+					<div class="codrops-links">
+						<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/MockupSlideshow/" title="Previous Demo"><span>Previous Demo</span></a> /
+						<a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=21386" title="Back to the article"><span>Back to the Codrops Article</span></a>
+					</div>
+					<div class="button-wrap"><button data-dialog="somedialog" class="trigger">Open Dialog</button></div>
+				</header>
+				<nav id="menu" class="menu">
+					<div>
+						<h2>Simple</h2>
+						<ul>
+							<li><a href="index.html">Sandra</a></li>
+							<li><a href="sally.html">Sally</a></li>
+						</ul>
+						<h2>Body</h2>
+						<ul>
+							<li><a href="dean.html">Dean</a></li>
+							<li><a href="susan.html">Susan</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>Move/Slide</h2>
+						<ul>
+							<li><a href="cathy.html">Cathy</a></li>
+							<li><a href="annie.html">Annie</a></li>
+							<li><a href="val.html">Val</a></li>
+							<li><a href="ricky.html">Ricky</a></li>
+							<li><a href="donna.html">Donna</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>Sticky</h2>
+						<ul>
+							<li><a href="ken.html">Ken</a></li>
+							<li><a class="current-demo" href="alex.html">Alex</a></li>
+						</ul>
+						<h2>Jelly</h2>
+						<ul>
+							<li><a href="don.html">Don</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>SVG</h2>
+						<ul>
+							<li><a href="laura.html">Laura</a></li>
+							<li><a href="jamie.html">Jamie</a></li>
+							<li><a href="henry.html">Henry</a></li>
+							<li><a href="jim.html">Jim</a></li>
+							<li><a href="wilma.html">Wilma</a></li>
+						</ul>
+					</div>
+				</nav>
+				<div id="somedialog" class="dialog">
+					<div class="dialog__overlay"></div>
+					<div class="dialog__content">
+						<h2><strong>Howdy</strong>, I'm a dialog box</h2><div><button class="action" data-dialog-close>Close</button></div>
+					</div>
+				</div>
+				<!-- Related demos -->
+				<section class="related">
+					You might also like: <a href="http://tympanus.net/Development/FullscreenOverlayStyles/">Fullscreen Overlay Effects</a> and <a href="http://tympanus.net/Development/ModalWindowEffects/">Nifty Modal Window Effects</a>
+				</section>
+			</div><!-- /content -->
+		</div><!-- /container -->
+		<script src="js/classie.js"></script>
+		<script src="js/dialogFx.js"></script>
+		<script>
+			(function() {
+
+				var dlgtrigger = document.querySelector( '[data-dialog]' ),
+					somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+					dlg = new DialogFx( somedialog );
+
+				dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+
+			})();
+		</script>
+	</body>
+</html>

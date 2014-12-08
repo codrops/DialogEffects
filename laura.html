@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+	<head>
+		<meta charset="UTF-8" />
+		<meta http-equiv="X-UA-Compatible" content="IE=edge">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Dialog Effects | Laura</title>
+		<meta name="description" content="A Collection of Dialog Effects" />
+		<meta name="keywords" content="dialog, effect, modal, overlay, animation, web design" />
+		<meta name="author" content="Codrops" />
+		<link rel="shortcut icon" href="../favicon.ico">
+		<link rel="stylesheet" type="text/css" href="css/normalize.css" />
+		<link rel="stylesheet" type="text/css" href="css/demo.css" />
+		<!-- common styles -->
+		<link rel="stylesheet" type="text/css" href="css/dialog.css" />
+		<!-- individual effect -->
+		<link rel="stylesheet" type="text/css" href="css/dialog-laura.css" />
+		<script src="js/snap.svg-min.js"></script>
+		<script src="js/modernizr.custom.js"></script>
+	</head>
+	<body>
+		<div class="container">
+			<div class="content">
+				<header class="codrops-header">
+					<h1><span>A collection of</span> Dialog Effects</h1>
+					<div class="codrops-links">
+						<a class="codrops-icon codrops-icon-prev" href="http://tympanus.net/Development/MockupSlideshow/" title="Previous Demo"><span>Previous Demo</span></a> /
+						<a class="codrops-icon codrops-icon-drop" href="http://tympanus.net/codrops/?p=21386" title="Back to the article"><span>Back to the Codrops Article</span></a>
+					</div>
+					<div class="button-wrap"><button data-dialog="somedialog" class="trigger">Open Dialog</button></div>
+				</header>
+				<nav id="menu" class="menu">
+					<div>
+						<h2>Simple</h2>
+						<ul>
+							<li><a href="index.html">Sandra</a></li>
+							<li><a href="sally.html">Sally</a></li>
+						</ul>
+						<h2>Body</h2>
+						<ul>
+							<li><a href="dean.html">Dean</a></li>
+							<li><a href="susan.html">Susan</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>Move/Slide</h2>
+						<ul>
+							<li><a href="cathy.html">Cathy</a></li>
+							<li><a href="annie.html">Annie</a></li>
+							<li><a href="val.html">Val</a></li>
+							<li><a href="ricky.html">Ricky</a></li>
+							<li><a href="donna.html">Donna</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>Sticky</h2>
+						<ul>
+							<li><a href="ken.html">Ken</a></li>
+							<li><a href="alex.html">Alex</a></li>
+						</ul>
+						<h2>Jelly</h2>
+						<ul>
+							<li><a href="don.html">Don</a></li>
+						</ul>
+					</div>
+					<div>
+						<h2>SVG</h2>
+						<ul>
+							<li><a class="current-demo" href="laura.html">Laura</a></li>
+							<li><a href="jamie.html">Jamie</a></li>
+							<li><a href="henry.html">Henry</a></li>
+							<li><a href="jim.html">Jim</a></li>
+							<li><a href="wilma.html">Wilma</a></li>
+						</ul>
+					</div>
+				</nav>
+				<div id="somedialog" class="dialog">
+					<div class="dialog__overlay"></div>
+					<div class="dialog__content">
+						<div class="morph-shape" data-morph-open="M0,33.699V0c0,0,13.458,0,40.125,0C66.793,0,80,0,80,0v33.974v0.103V60c0,0-13.333,0-40,0c-26.667,0-40,0-40,0V33.699" data-morph-close="M0,33.699V0c0,0,13.208,11,39.875,11C66.543,11,80,0,80,0v33.974v0.103v13.111C80,47.188,66.667,60,40,60
+	C13.333,60,0,47.062,0,47.062V33.699">
+							<svg xmlns="http://www.w3.org/2000/svg" width="100%" height="100%" viewBox="0 0 80 60" preserveAspectRatio="none">
+								<path d="M0,33.699V0c0,0,13.208,11,39.875,11C66.543,11,80,0,80,0v33.974v0.103v13.111C80,47.188,66.667,60,40,60
+	C13.333,60,0,47.062,0,47.062V33.699"></path>
+							</svg>
+						</div>
+						<div class="dialog-inner">
+							<h2><strong>Howdy</strong>, I'm a dialog box</h2><div><button class="action" data-dialog-close>Close</button></div>
+						</div>
+					</div>
+				</div>
+				<!-- Related demos -->
+				<section class="related">
+					You might also like: <a href="http://tympanus.net/Development/FullscreenOverlayStyles/">Fullscreen Overlay Effects</a> and <a href="http://tympanus.net/Development/ModalWindowEffects/">Nifty Modal Window Effects</a>
+				</section>
+			</div><!-- /content -->
+		</div><!-- /container -->
+		<script src="js/classie.js"></script>
+		<script src="js/dialogFx.js"></script>
+		<script>
+			(function() {
+
+				var dlgtrigger = document.querySelector( '[data-dialog]' ),
+
+					somedialog = document.getElementById( dlgtrigger.getAttribute( 'data-dialog' ) ),
+					// svg..
+					morphEl = somedialog.querySelector( '.morph-shape' ),
+					s = Snap( morphEl.querySelector( 'svg' ) ),
+					path = s.select( 'path' ),
+					steps = { 
+						open : morphEl.getAttribute( 'data-morph-open' ),
+						close : morphEl.getAttribute( 'data-morph-close' )
+					},
+					dlg = new DialogFx( somedialog, {
+						onOpenDialog : function( instance ) {
+							// animate path
+							setTimeout(function() {
+								path.stop().animate( { 'path' : steps.open }, 1500, mina.elastic );
+							}, 150 );
+						},
+						onCloseDialog : function( instance ) {
+							path.stop().animate( { 'path' : steps.close }, 250, mina.easeout );
+						}
+					} );
+
+				dlgtrigger.addEventListener( 'click', dlg.toggle.bind(dlg) );
+
+			})();
+		</script>
+	</body>
+</html>
