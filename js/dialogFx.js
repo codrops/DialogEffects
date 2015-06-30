@@ -46,13 +46,21 @@
 		extend( this.options, options );
 		this.ctrlClose = this.el.querySelector( '[data-dialog-close]' );
 		this.isOpen = false;
+		this.inProgress = false;
 		this._initEvents();
 	}
 
 	DialogFx.prototype.options = {
 		// callbacks
+		onFirstOpenDialog: function() { return false; },
+		onBeforeOpenDialog : function() { return false; },
 		onOpenDialog : function() { return false; },
-		onCloseDialog : function() { return false; }
+		onBeforeCloseDialog : function() { return false; },
+		onCloseDialog : function() { return false; },
+
+		//timing for callbacks
+		nDefaultTimeOpenDialog: 0,
+		nDefaultTimeCloseDialog: 0
 	}
 
 	DialogFx.prototype._initEvents = function() {
@@ -73,24 +81,68 @@
 	}
 
 	DialogFx.prototype.toggle = function() {
+		//the toggle can be executed when any other open / close operation is in progress
 		var self = this;
-		if( this.isOpen ) {
-			classie.remove( this.el, 'dialog--open' );
-			classie.add( self.el, 'dialog--close' );
-			
-			onEndAnimation( this.el.querySelector( '.dialog__content' ), function() {
-				classie.remove( self.el, 'dialog--close' );
-			} );
 
-			// callback on close
-			this.options.onCloseDialog( this );
+		//operation in progress
+		this.inProgress = true;
+
+		if(!this.isEverOpen){
+			// callback the first time before to open
+			this.options.onFirstOpenDialog(this);
+			this.isEverOpen = true;
 		}
+
+
+		/**
+		 * close operation
+		 */
+		if(this.isOpen){
+			// callback before to close
+			this.options.onBeforeCloseDialog(this);
+
+			var this_this = this;
+
+			setTimeout(function(){
+				classie.remove(this_this.el, 'dialog--open');
+				classie.add(self.el, 'dialog--close');
+
+				onEndAnimation(this_this.el.querySelector('.dialog__content'), function() {
+					classie.remove(self.el, 'dialog--close');
+				});
+
+				// callback on close
+				this_this.options.onCloseDialog(this_this);
+
+				/**
+				 * toggle operation in progress ended
+				 */
+				this_this.inProgress = false;
+			}, this.options.nDefaultTimeCloseDialog);
+		}
+		/**
+		 * open operation
+		 */
 		else {
-			classie.add( this.el, 'dialog--open' );
+			// callback before to open
+			this.options.onBeforeOpenDialog(this);
 
-			// callback on open
-			this.options.onOpenDialog( this );
+			var this_this = this;
+
+			setTimeout(function(){
+				classie.add(this_this.el, 'dialog--open');
+
+				// callback on open
+				this_this.options.onOpenDialog(this_this);
+
+				/**
+				 * toggle operation in progress ended
+				 */
+				this_this.inProgress = false;
+
+			}, this.options.nDefaultTimeOpenDialog);
 		}
+
 		this.isOpen = !this.isOpen;
 	};
 
