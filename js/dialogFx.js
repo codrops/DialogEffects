@@ -77,7 +77,11 @@
 			}
 		} );
 
-		this.el.querySelector( '.dialog__overlay' ).addEventListener( 'click', this.toggle.bind(this) );
+
+		var oDialogOVerlay = this.el.querySelector( '.dialog__overlay' );
+		if( oDialogOVerlay !== null ){
+			oDialogOVerlay.addEventListener( 'click', this.toggle.bind(this) );	
+		}
 	}
 
 	DialogFx.prototype.toggle = function() {
