@@ -44,7 +44,7 @@
 		this.el = el;
 		this.options = extend( {}, this.options );
 		extend( this.options, options );
-		this.ctrlClose = this.el.querySelector( '[data-dialog-close]' );
+		this.ctrlsClose = this.el.querySelectorAll( '[data-dialog-close]' );
 		this.isOpen = false;
 		this.inProgress = false;
 		this._initEvents();
@@ -66,8 +66,10 @@
 	DialogFx.prototype._initEvents = function() {
 		var self = this;
 
-		// close action
-		this.ctrlClose.addEventListener( 'click', this.toggle.bind(this) );
+		// close action for multiple elements
+		for (var iClose = this.ctrlsClose.length - 1; iClose >= 0; iClose--){
+			this.ctrlsClose[iClose].addEventListener( 'click', this.toggle.bind(this) );
+		};
 
 		// esc key closes dialog
 		document.addEventListener( 'keydown', function( ev ) {
