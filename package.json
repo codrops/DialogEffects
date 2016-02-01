@@ -1,0 +1,28 @@
+{
+  "name": "dialog-fx",
+  "version": "0.0.2",
+  "description": "A small collection of dialog effects using CSS animations for your inspiration.",
+  "main": "js/dialogFx.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/codrops/DialogEffects.git"
+  },
+  "keywords": [
+    "dialog",
+    "effect",
+    "animation",
+    "css"
+  ],
+  "author": "codrops",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/codrops/DialogEffects/issues"
+  },
+  "homepage": "https://github.com/codrops/DialogEffects#readme",
+  "dependencies": {
+    "classie": "^1.0.0"
+  }
+}
