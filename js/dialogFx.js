@@ -8,8 +8,28 @@
  * Copyright 2014, Codrops
  * http://www.codrops.com
  */
-;( function( window ) {
-	
+
+(function (root, factory) {
+    var Modernizr = {
+        prefixed: function () {
+            return 'animation';
+        },
+        cssanimations: true,
+    };
+
+    if (typeof module === 'object' && module.exports) {
+        var classie = require('classie');
+        try {
+            require('browsernizr/test/css/animations');
+            Modernizr = require('browsernizr');
+        } catch(e) {}
+        module.exports = factory(classie, Modernizr);
+    } else {
+        // Browser globals (root is window)
+        root.DialogFx = factory(root.classie, root.Modernizr || Modernizr);
+    }
+}(this, function (classie, Modernizr) {
+
 	'use strict';
 
 	var support = { animations : Modernizr.cssanimations },
@@ -151,8 +171,5 @@
 
 		this.isOpen = !this.isOpen;
 	};
-
-	// add to global namespace
-	window.DialogFx = DialogFx;
-
-})( window );
+    return DialogFx;
+}));
